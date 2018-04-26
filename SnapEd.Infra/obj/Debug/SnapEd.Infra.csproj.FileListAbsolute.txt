@@ -1,0 +1,9 @@
+c:\SnapEd\SnapEdProject\SnapEd.Infra\bin\Debug\SnapEd.Infra.dll.config
+c:\SnapEd\SnapEdProject\SnapEd.Infra\bin\Debug\SnapEd.Infra.dll
+c:\SnapEd\SnapEdProject\SnapEd.Infra\bin\Debug\SnapEd.Infra.pdb
+c:\SnapEd\SnapEdProject\SnapEd.Infra\bin\Debug\EntityFramework.dll
+c:\SnapEd\SnapEdProject\SnapEd.Infra\bin\Debug\EntityFramework.SqlServer.dll
+c:\SnapEd\SnapEdProject\SnapEd.Infra\bin\Debug\EntityFramework.xml
+c:\SnapEd\SnapEdProject\SnapEd.Infra\bin\Debug\EntityFramework.SqlServer.xml
+c:\SnapEd\SnapEdProject\SnapEd.Infra\obj\Debug\SnapEd.Infra.dll
+c:\SnapEd\SnapEdProject\SnapEd.Infra\obj\Debug\SnapEd.Infra.pdb

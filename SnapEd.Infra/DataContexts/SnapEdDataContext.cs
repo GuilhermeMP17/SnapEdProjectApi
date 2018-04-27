@@ -11,9 +11,9 @@ namespace SnapEd.Infra.DataContexts
     public class SnapEdDataContext : DbContext
     {
         //Codesp-PC
-        public SnapEdDataContext() : base(@"Data Source=CODESP2389\SQLEXPRESS;Initial Catalog=DB_SnapEd_Local;User ID=sa;Password=123Mudar;")
+        //public SnapEdDataContext() : base(@"Data Source=CODESP2389\SQLEXPRESS;Initial Catalog=DB_SnapEd_Local;User ID=sa;Password=123Mudar;")
         //Notebook
-        //public SnapEdContext() : base(@"Data Source=DESKTOP-NGBL7K8/SQLEXPRESS;Initial Catalog=DB_SnapEd_Local;User ID=sa;Password=123Mudar;") 
+        public SnapEdDataContext() : base(@"Data Source=.\SQLEXPRESS;Initial Catalog=DB_SnapEd_Local;User ID=sa;Password=123Mudar;") 
         {
             Database.SetInitializer<SnapEdDataContext>(new SnapEdDataContextInitializer());
         }
@@ -24,5 +24,7 @@ namespace SnapEd.Infra.DataContexts
         }
 
         public DbSet<ClassRoom> ClassRoom { get; set; }
+
+        public DbSet<User> Users { get; set; }
     }    
 }

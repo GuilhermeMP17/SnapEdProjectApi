@@ -21,7 +21,7 @@ namespace SnapEd.Api.Controllers
     public class UsersController : ApiController
     {
         private SnapEdDataContext db = new SnapEdDataContext();
-        private const string PASSWORDFIELD = "password";
+        private const string PASSWORDFIELD = "Password";
 
         // GET: api/Users
         //[Authorize]

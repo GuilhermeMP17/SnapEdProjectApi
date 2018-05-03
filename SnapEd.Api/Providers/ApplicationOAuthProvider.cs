@@ -163,7 +163,7 @@ namespace SnapEd.Api.Providers
         {
             IDictionary<string, string> data = new Dictionary<string, string>
             {
-                { "userName", userName }
+                { "UserName", userName }
             };
             return new AuthenticationProperties(data);
         }

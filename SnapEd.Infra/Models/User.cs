@@ -32,6 +32,9 @@ namespace SnapEd.Infra.Models
         public string LastName { get; set; }
 
         [MaxLength(120)]
+        public string Email { get; set; }
+
+        [MaxLength(120)]
         public string Login { get; set; }
 
         [MaxLength(120)]

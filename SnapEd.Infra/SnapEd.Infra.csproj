@@ -92,6 +92,8 @@
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ClassRoom.cs" />
     <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\Posting.cs" />
+    <Compile Include="Models\StudentClass.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

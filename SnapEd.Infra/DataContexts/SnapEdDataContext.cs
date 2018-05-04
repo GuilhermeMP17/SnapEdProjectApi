@@ -24,7 +24,8 @@ namespace SnapEd.Infra.DataContexts
         }
 
         public DbSet<ClassRoom> ClassRoom { get; set; }
-
         public DbSet<User> Users { get; set; }
+        public DbSet<StudentClass> StudantClass { get; set; }
+        public DbSet<Posting> Posting { get; set; }
     }    
 }

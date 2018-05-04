@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 
 namespace SnapEd.Infra.Models
 {
+    #region Permissions
     public enum Permission
     {
         Aluno = 1,
@@ -17,7 +18,9 @@ namespace SnapEd.Infra.Models
         Professor = 9,
         Administrator = 10,
     }
+    #endregion
 
+    #region TB_USER
     [Table("TB_USER")]
     public class User
     {
@@ -55,4 +58,5 @@ namespace SnapEd.Infra.Models
             }
         }
     }
+    #endregion
 }

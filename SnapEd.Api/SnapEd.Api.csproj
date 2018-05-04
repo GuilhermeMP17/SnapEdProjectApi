@@ -254,6 +254,8 @@
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
     <Compile Include="Controllers\ClassRoomsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\PostingsController.cs" />
+    <Compile Include="Controllers\StudentClassesController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Dependency\DependencyResolver.cs" />
     <Compile Include="Dependency\UnityResolver.cs" />

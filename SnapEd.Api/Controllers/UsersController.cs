@@ -17,21 +17,29 @@ using SnapEd.Infra.Models;
 
 namespace SnapEd.Api.Controllers
 {
+    #region HEADS
+    [RoutePrefix("api")]
     [EnableCors(origins: "*", headers: "*", methods: "*")]
+    #endregion
     public class UsersController : ApiController
     {
+        #region CONTEXT
         private SnapEdDataContext db = new SnapEdDataContext();
         private const string PASSWORDFIELD = "Password";
+        #endregion
 
+        #region GETS
         // GET: api/Users
-        //[Authorize]
+        [Authorize]
+        [Route("Users")]
         public IQueryable<User> GetUsers()
         {
             return db.Users.Where(o => o.Active == true);
         }
 
         // GET: api/Users/5
-        //[Authorize]
+        [Authorize]
+        [Route("Users/{id}")]
         [ResponseType(typeof(User))]
         public IHttpActionResult GetUser(int id)
         {
@@ -43,11 +51,13 @@ namespace SnapEd.Api.Controllers
 
             return Ok(user);
         }
-        //[Authorize]
+
+        [Authorize]
+        [Route("UserByLogin/{login}")]
         [ResponseType(typeof(User))]
-        public IHttpActionResult GetByName(string name)
+        public IHttpActionResult UserByLogin(string login)
         {
-            User user = db.Users.Where(p => p.Login.ToLower() == name.ToLower()).FirstOrDefault();
+            User user = db.Users.Where(p => p.Login.ToLower() == login.ToLower()).FirstOrDefault();
             if (user == null)
             {
                 return NotFound();
@@ -55,7 +65,12 @@ namespace SnapEd.Api.Controllers
 
             return Ok(user);
         }
+        #endregion
+
+        #region PUT
         // PUT: api/Users/5
+        [Authorize]
+        [Route("Users/{id}")]
         [ResponseType(typeof(void))]
         public IHttpActionResult PutUser(int id, User user)
         {
@@ -95,8 +110,11 @@ namespace SnapEd.Api.Controllers
 
             return StatusCode(HttpStatusCode.NoContent);
         }
+        #endregion
 
+        #region POST
         // POST: api/Users
+        [Route("Users")]
         [ResponseType(typeof(User))]
         public IHttpActionResult PostUser(User user)
         {
@@ -117,8 +135,12 @@ namespace SnapEd.Api.Controllers
 
             return CreatedAtRoute("DefaultApi", new { id = user.IdUser }, user);
         }
+        #endregion
 
+        #region DELETE
         // DELETE: api/Users/5
+        [Authorize]
+        [Route("Users/{id}")]
         [ResponseType(typeof(User))]
         public IHttpActionResult DeleteUser(int id)
         {
@@ -133,7 +155,9 @@ namespace SnapEd.Api.Controllers
 
             return Ok(user);
         }
+        #endregion
 
+        #region DISPOSE
         protected override void Dispose(bool disposing)
         {
             if (disposing)
@@ -142,22 +166,30 @@ namespace SnapEd.Api.Controllers
             }
             base.Dispose(disposing);
         }
+        #endregion
 
+        #region EXISTS
         private bool UserExists(int id)
         {
             return db.Users.Count(e => e.IdUser == id) > 0;
         }
+        #endregion
 
+        #region SAVEPASSWORD
         private string getSavedPassword(int id)
         {
             return new SnapEdDataContext().Users.Find(id).Password;
         }
+        #endregion
 
+        #region CURRENTPASSWORD
         private string getCurrentPassword(User tableContext)
         {
             return db.Entry(tableContext).Property(PASSWORDFIELD).CurrentValue.ToString();
         }
+        #endregion
 
+        #region UPDATEPASSWORDWITHHASH
         private void updatePasswordWithHash(User tableContext)
         {
             var _currentPassword = getCurrentPassword(tableContext);
@@ -165,8 +197,10 @@ namespace SnapEd.Api.Controllers
             if (tableContext.IdUser == 0 || getSavedPassword(tableContext.IdUser) != _currentPassword)
                 db.Entry(tableContext).Property(PASSWORDFIELD).CurrentValue = Cryptography.GetMD5Hash(_currentPassword);
         }
+        #endregion
     }
 
+    #region CRYPTOGRAPHY
     public static class Cryptography
     {
         public static string GetMD5Hash(string Valor)
@@ -175,4 +209,5 @@ namespace SnapEd.Api.Controllers
             return BitConverter.ToString(md5.ComputeHash(Encoding.UTF8.GetBytes(Valor))).Replace("--", string.Empty);
         }
     }
+    #endregion
 }

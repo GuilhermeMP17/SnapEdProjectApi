@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 
 namespace SnapEd.Infra.Models
 {
+    #region TB_CLASSROOM
     [Table("TB_CLASSROOM")]
     public class ClassRoom
     {
@@ -29,4 +30,5 @@ namespace SnapEd.Infra.Models
         [MaxLength(240)]
         public string ImagePathClass { get; set; }
     }
+    #endregion
 }

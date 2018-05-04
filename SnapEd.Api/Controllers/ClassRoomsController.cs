@@ -11,20 +11,32 @@ using System.Web.Http;
 using System.Web.Http.Description;
 using SnapEd.Infra.DataContexts;
 using SnapEd.Infra.Models;
+using System.Web.Http.Cors;
 
 namespace SnapEd.Api.Controllers
 {
+    #region HEADS
+    [RoutePrefix("api")]
+    [EnableCors(origins: "*", headers: "*", methods: "*")]
+    #endregion
     public class ClassRoomsController : ApiController
     {
+        #region CONTEXT
         private SnapEdDataContext db = new SnapEdDataContext();
+        #endregion
 
+        #region GETS
         // GET: api/ClassRooms
+        [Authorize]
+        [Route("ClassRooms")]
         public IQueryable<ClassRoom> GetClassRoom()
         {
             return db.ClassRoom;
         }
 
         // GET: api/ClassRooms/5
+        [Authorize]
+        [Route("ClassRooms/{id}")]
         [ResponseType(typeof(ClassRoom))]
         public async Task<IHttpActionResult> GetClassRoom(int id)
         {
@@ -36,8 +48,12 @@ namespace SnapEd.Api.Controllers
 
             return Ok(classRoom);
         }
+        #endregion
 
+        #region PUT
         // PUT: api/ClassRooms/5
+        [Authorize(Roles = "Administrator")]
+        [Route("ClassRooms/{id}")]
         [ResponseType(typeof(void))]
         public async Task<IHttpActionResult> PutClassRoom(int id, ClassRoom classRoom)
         {
@@ -71,8 +87,12 @@ namespace SnapEd.Api.Controllers
 
             return StatusCode(HttpStatusCode.NoContent);
         }
+        #endregion
 
+        #region POST
         // POST: api/ClassRooms
+        [Authorize(Roles = "Administrator")]
+        [Route("ClassRooms/{id}")]
         [ResponseType(typeof(ClassRoom))]
         public async Task<IHttpActionResult> PostClassRoom(ClassRoom classRoom)
         {
@@ -86,8 +106,12 @@ namespace SnapEd.Api.Controllers
 
             return CreatedAtRoute("DefaultApi", new { id = classRoom.IdClassRom }, classRoom);
         }
+        #endregion
 
+        #region DELETE
         // DELETE: api/ClassRooms/5
+        [Authorize(Roles = "Administrator")]
+        [Route("ClassRooms/{id}")]
         [ResponseType(typeof(ClassRoom))]
         public async Task<IHttpActionResult> DeleteClassRoom(int id)
         {
@@ -102,7 +126,9 @@ namespace SnapEd.Api.Controllers
 
             return Ok(classRoom);
         }
+        #endregion
 
+        #region DISPOSE
         protected override void Dispose(bool disposing)
         {
             if (disposing)
@@ -111,10 +137,13 @@ namespace SnapEd.Api.Controllers
             }
             base.Dispose(disposing);
         }
+        #endregion
 
+        #region Exists
         private bool ClassRoomExists(int id)
         {
             return db.ClassRoom.Count(e => e.IdClassRom == id) > 0;
         }
+        #endregion
     }
 }

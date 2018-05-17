@@ -30,7 +30,7 @@ namespace SnapEd.Api.Controllers
 
         #region GETS
         // GET: api/Users
-        [Authorize]
+        //[Authorize]
         [Route("Users")]
         public IQueryable<User> GetUsers()
         {

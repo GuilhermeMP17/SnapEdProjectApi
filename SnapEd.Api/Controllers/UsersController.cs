@@ -14,6 +14,7 @@ using System.Web.Http.Cors;
 using System.Web.Http.Description;
 using SnapEd.Infra.DataContexts;
 using SnapEd.Infra.Models;
+using System.Security.Claims;
 
 namespace SnapEd.Api.Controllers
 {
@@ -30,10 +31,13 @@ namespace SnapEd.Api.Controllers
 
         #region GETS
         // GET: api/Users
-        //[Authorize]
+        [Authorize]
         [Route("Users")]
         public IQueryable<User> GetUsers()
         {
+            ClaimsIdentity claimsIdentity = User.Identity as ClaimsIdentity;
+            var currentUser = db.Users.Where(w => w.Login.ToLower() == claimsIdentity.Name.ToLower()).SingleOrDefault();
+
             return db.Users.Where(o => o.Active == true);
         }
 

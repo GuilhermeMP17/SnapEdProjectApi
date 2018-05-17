@@ -12,6 +12,7 @@ using System.Web.Http.Description;
 using SnapEd.Infra.DataContexts;
 using SnapEd.Infra.Models;
 using System.Web.Http.Cors;
+using System.Security.Claims;
 
 namespace SnapEd.Api.Controllers
 {
@@ -57,6 +58,10 @@ namespace SnapEd.Api.Controllers
         [ResponseType(typeof(void))]
         public async Task<IHttpActionResult> PutClassRoom(int id, ClassRoom classRoom)
         {
+            ClaimsIdentity claimsIdentity = User.Identity as ClaimsIdentity;
+            var currentUser = db.Users.Where(w => w.Login.ToLower() == claimsIdentity.Name.ToLower()).SingleOrDefault();
+            classRoom.IdUserCreated = currentUser.IdUser;
+
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
@@ -96,6 +101,10 @@ namespace SnapEd.Api.Controllers
         [ResponseType(typeof(ClassRoom))]
         public async Task<IHttpActionResult> PostClassRoom(ClassRoom classRoom)
         {
+            ClaimsIdentity claimsIdentity = User.Identity as ClaimsIdentity;
+            var currentUser = db.Users.Where(w => w.Login.ToLower() == claimsIdentity.Name.ToLower()).SingleOrDefault();
+            classRoom.IdUserCreated = currentUser.IdUser;
+
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
